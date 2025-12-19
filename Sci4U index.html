@@ -1,0 +1,268 @@
+ <!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sci4U - Science for you</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="Sci4U CSS.css">
+  <script src="periodic.js"></script>
+  <script src="Hoctap.js"></script>
+  <script src="state.js"></script>
+  <script src="Quiz.js"></script>
+  <script src="Flashcard.js"></script>
+  <script src="AI.js"></script>
+  <script src="other.js"></script>
+</head>
+<body>
+  <!-- Sidebar thanh điều hướng -->
+  <nav>
+    <h2>Sci4U</h2>
+    <a href="#" class="active" onclick="showPage('home',this)"><i class="fa-solid fa-house"></i>Trang chủ</a>
+    <a href="#" onclick="openHocModal()"><i class="fa-solid fa-book"></i>Học tập</a>
+    <a href="#" onclick="openQuizModal()"><i class="fa-solid fa-pen-to-square"></i>Quiz</a>
+    <a href="#" onclick="showPage('flashcards', this)"><i class="fa-solid fa-clone"></i>Flashcards</a>
+    <a href="#" onclick="showPage('periodic', this)"><i class="fa-solid fa-atom"></i>Periodic</a>
+    <a href="#" onclick="showPage('ai',this)"><i class="fa-solid fa-robot"></i>AI hỗ trợ</a>
+    <a href="#" onclick="showPage('setting', this)"><i class="fa-solid fa-gear"></i>Setting</a>
+    <img src="/Knowlegde/footer-logo-school.png"
+         style="max-width:6%; border-radius:12px;
+            position:fixed; bottom:20px; left:5%;
+            transform:translateX(-50%);">
+  </nav>
+  
+  <!-- Nút cuộn -->
+<button id="scrollTopBtn" 
+        style="
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          background-color: #293f63;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 55px;
+          height: 55px;
+          display: none;
+          cursor: pointer;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        ">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+  <!-- blablabla -->
+  <div class="content">
+    <header>
+      <h1>Sci4U - Science for you</h1>
+      <p>Nền tảng hỗ trợ học KHTN</p>
+    </header>
+
+    <!-- Home -->
+    <main id="home" class="page active">
+      <h2>📌 Chào mừng bạn đến Sci4U</h2>
+      <p>Chọn một chức năng để bắt đầu:</p>
+      <div class="grid">
+        <div class="card" onclick="openHocModal()"><i class="fa-solid fa-book"></i><br>Bắt đầu học</div>
+        <div class="card" onclick="openQuizModal()"><i class="fa-solid fa-pen-to-square"></i><br>Quiz</div>
+        <div class="card" onclick="showPage('flashcards', this)"><i class="fa-solid fa-clone"></i><br>Flashcards</div>
+        <div class="card" onclick="showPage('ai')"><i class="fa-solid fa-robot"></i><br>AI hỗ trợ</div>
+        <div class="card" onclick="showPage('periodic')"><i class="fa-solid fa-atom"></i><br>Bảng tuần hoàn</div>
+      </div>
+    </main>
+
+    <!-- Học tập -->
+    <main id="hoc-tap" class="page">
+      <h2>📚 Học tập</h2>
+      <div id="hoc-content"></div>
+    </main>
+
+    <!-- Quiz -->
+    <main id="quiz" class="page">
+      <h2>📝 Quiz ôn tập </h2>
+
+      <!-- Quiz control -->
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div class="meta-small">Lớp: <span id="quiz-class-display">-</span></div>
+        <div class="meta-small">Bài: <span id="quiz-lesson-display">-</span></div>
+        <div style="margin-left:auto">
+          <button onclick="showLessonModalForClass(selectedClass || 7)">🔁 Chọn lại bài</button>
+          <button onclick="viewHistory()">📜 Lịch sử</button>
+        </div>
+      </div>
+
+      <!-- tiến trình -->
+      <div class="progress-wrap">
+        <div class="q-toolbar">
+          <div class="meta-small" id="q-number">Câu 0/0</div>
+          <div class="meta-small" id="q-timer">—</div>
+        </div>
+        <div class="progress"><i id="progress-bar"></i></div>
+      </div>
+
+      <!-- Quiz container -->
+      <div id="quiz-box" style="margin-top:14px"></div>
+
+      <!-- Kết quả / lịch sử -->
+      <div id="quiz-results-area"></div>
+      <div id="quiz-history-area" style="margin-top:14px"></div>
+    </main>
+      <!-- periodic -->
+  <main id="periodic" class="page">
+      <h2>Bảng tuần hoàn hóa học</h2>
+      <div id="periodic-content"></div>
+    </main>
+    <!-- Flashcards -->
+    <main id="flashcards" class="page">
+      <h2>🎯 Flashcards</h2>
+      <div class="flash-header">
+        <div class="left">
+          <div id="flash-score" class="meta-small">Điểm: 0/10</div>
+          <div id="flash-timer" class="meta-small">Thời gian: 0s</div>
+        </div>
+        <div class="right">
+          <button onclick="initFlashcards()">🔁 Chơi lại</button>
+        </div>
+      </div>
+      <div id="flash-box" class="flash-grid"></div>
+    </main>
+
+    <!-- AI hỗ trợ -->
+    <main id="ai" class="page">
+      <h2>🤖 AI hỗ trợ KHTN</h2>
+      <div id="chat-box" style="background:#fff;color:#000;border-radius:12px;padding:10px;height:350px;overflow:auto;margin-bottom:10px">
+        <i>AI sẵn sàng trả lời câu hỏi...</i>
+      </div>
+      <div id="messages">
+        <input id="user-input" placeholder="Nhập câu hỏi..."/>
+        <button id="sendButton" onclick="sendMessage()">Gửi</button>
+      </div>
+    </main>
+
+      <!-- Setting -->
+<main id="setting" class="page">
+  <h2>⚙️ Cài đặt</h2>
+
+  <!-- Tài khoản -->
+  <section class="setting-section">
+    <h3>👤 Tài khoản</h3>
+    <button>Đăng nhập</button>
+    <button>Đăng ký</button>
+    <p style="font-size:14px;color:gray">*(Tính năng sắp cập nhật)*</p>
+  </section>
+
+  <!-- Giao diện -->
+  <section class="setting-section">
+    <h3>🎨 Giao diện</h3>
+    
+    <label>
+      Chế độ nền:
+      <select id="theme-select" onchange="changeTheme()">
+        <option value="light">🌞 Sáng</option>
+        <option value="dark">🌙 Tối</option>
+      </select>
+    </label>
+
+    <br><br>
+
+    <label>
+      Kích thước chữ:
+      <select id="font-size-select" onchange="changeFontSize()">
+        <option value="16">Nhỏ</option>
+        <option value="18" selected>Vừa</option>
+        <option value="20">Lớn</option>
+      </select>
+    </label>
+
+    <br><br>
+
+    <label>
+      Ngôn ngữ:
+      <select id="lang-select" onchange="changeLanguage()">
+        <option value="vi">Tiếng Việt</option>
+        <option value="en">English</option>
+      </select>
+    </label>
+  </section>
+
+  <!-- Âm thanh -->
+  <section class="setting-section">
+    <h3>🔊 Âm thanh</h3>
+    <label>
+      <input type="checkbox" id="sound-toggle" onchange="toggleSound()"> Bật âm Quiz
+    </label><br>
+    <label>
+      <input type="checkbox" id="wrong-sound-toggle" onchange="toggleWrongSound()"> Âm báo sai
+    </label>
+  </section>
+
+  <!-- Thông báo -->
+  <section class="setting-section">
+    <h3>🔔 Thông báo</h3>
+    <label>
+      <input type="checkbox" id="notify-toggle" onchange="toggleNotify()"> Bật thông báo tiến trình học
+    </label><br>
+    <label>
+      <input type="checkbox" id="daily-reminder-toggle" onchange="toggleDailyReminder()"> Nhắc học hàng ngày
+    </label>
+  </section>
+
+  <!-- Bảo mật -->
+  <section class="setting-section">
+    <h3>🔐 Bảo mật & Quyền riêng tư</h3>
+    <button onclick="clearLocalData()">Xóa toàn bộ dữ liệu cục bộ</button>
+    <p style="font-size:14px;color:gray">(bao gồm lịch sử quiz, flashcards,…)</p>
+
+    <label>
+      <input type="checkbox" id="privacy-mode-toggle" onchange="togglePrivacyMode()"> Chế độ riêng tư
+    </label>
+  </section>
+</main>
+
+  </div>
+
+  <!-- Modal Học tập -->
+  <div id="hoc-modal" class="modal">
+    <div class="modal-box">
+      <h3>Chọn lớp để học</h3>
+      <p>Hãy chọn lớp để bắt đầu:</p>
+      <button onclick="chooseClassFor('hoc',7)">Lớp 7</button>
+      <button onclick="chooseClassFor('hoc',8)">Lớp 8</button><br><br>
+      <button onclick="closeHocModal()">Đóng</button>
+    </div>
+  </div>
+
+  <!-- Modal Quiz -->
+  <div id="quiz-modal" class="modal">
+    <div class="modal-box">
+      <h3>Chọn lớp để làm Quiz</h3>
+      <p>Hãy chọn lớp để bắt đầu:</p>
+      <button onclick="chooseClassFor('quiz',7)">Lớp 7</button>
+      <button onclick="chooseClassFor('quiz',8)">Lớp 8</button><br><br>
+      <button onclick="closeQuizModal()">Đóng</button>
+    </div>
+  </div>
+
+  <!-- Modal chọn bài + chọn số câu -->
+  <div id="lesson-modal" class="modal">
+    <div class="modal-box" style="width:360px">
+      <h3>Chọn bài & số câu</h3>
+      <p id="lesson-modal-info"></p>
+      <div id="lesson-buttons" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center"></div>
+      <div style="margin-top:12px">
+        <label class="meta-small">Số câu: </label>
+        <select id="num-questions-select">
+          <option value="5">5 câu</option>
+          <option value="10" selected>10 câu</option>
+          <option value="20">20 câu</option>
+        </select>
+      </div>
+      <div style="margin-top:12px">
+        <button onclick="closeLesson()">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup phản hồi -->
+  <div id="popup"></div>
+</body>
+</html>
