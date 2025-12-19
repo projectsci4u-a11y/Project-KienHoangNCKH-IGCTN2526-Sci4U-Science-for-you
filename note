@@ -1,2 +1,6 @@
 git commit -m "..."
-"..." là message để commit trong terminal
+*> "..." là message để commit lên github
+git add "..."
+*> "..." là add file mới để commit
+git pull origin main
+*> là để pull từ github về vscode
