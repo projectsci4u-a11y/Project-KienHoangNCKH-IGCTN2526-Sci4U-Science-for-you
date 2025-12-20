@@ -401,7 +401,7 @@ function elementDetail(index) {
       <div style="margin-top:12px;color:#334155;font-size:13px;line-height:1.5">${desc}</div>
       
       <div style="margin-top:12px;text-align:center">
-        <button class="audio-btn" onclick="playAudio('${p.name || ''}')}" title="Phát âm">
+        <button class="audio-btn" onclick="playAudio('${p.name || ''}')" title="Phát âm">
           <i class="fa-solid fa-volume-high"></i>
         </button>
       </div>
@@ -432,8 +432,9 @@ function showPreiodic() {
 
   return html + html1 + html2;
 };
-function playAudio(audio){
-  let play_audio = new Audio("./audio/" + audio+".mp3")
-  play_audio.play();
-  return;
+function playAudio(name) {
+  const audio = new Audio("./audio/" + encodeURIComponent(name) + ".mp3");
+  audio.play().catch(err => {
+    console.warn("Không phát được audio:", err);
+  });
 }
