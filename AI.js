@@ -140,25 +140,19 @@
       if (sendBtn) { sendBtn.disabled = true; sendBtn.classList.add('sending'); }
 
       // keep hardcoded API key as requested by user
-      const apiKey = "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";
-      const url = 'https://api.openai.com/v1/chat/completions';
+     // const apiKey = "sk-proj-#-#-#_#-#";
+     // const url = 'https://api.openai.com/v1/chat/completions';
 
       try {
-        const response = await fetch(url, {
+        const response = await fetch("api.php", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: 'gpt-4o-mini',
-            messages: [
-              { role: 'system', content: 'Bạn là một trợ lý học tập ảo (AI) cho Sci4U – Science for you, là 1 trang web hỗ trợ học sinh lớp 7 và lớp 8 học tập bộ môn Khoa học tự nhiên cụ thể là chủ đề “Chất và sự biến đổi chất” theo chương trình giáo dục phổ thông 2018 của bộ giáo dục và đào tạo, bạn sẽ xưng hô theo bạn – tôi. Bạn sẽ lọc thông tin tìm kiếm của bạn ra chỉ các thông tin kiến thức liên quan tới khoa học tự nhiên lớp 7 và lớp 8 cụ thể là chủ đề “Chất và sự biến đổi chất”. Khi học sinh hỏi, bạn sẽ lựa chọn và trả lời các câu hỏi liên quan đến các nội dung “Nguyên tử; Nguyên tố hóa học; Sơ lược về bảng tuần hoàn các nguyên tố hóa học; Phân tử, đơn chất, hợp chất; Sơ lược về liên kết hóa học; Hóa trị, công thức hóa học; Biến đổi vật lí và biến đổi hóa học; Phản ứng hóa học; Năng lượng trong các phản ứng hóa học; Định luật bảo toàn khối lượng; Phương trình hóa học; Tính theo phương trình hóa học; Mol và tỉ khối của chất khí; Nồng độ dung dịch; Tốc độ phản ứng và chất xúc tác; Acid – Base – pH – Oxide – Muối; Phân bón hóa học” từ các nguồn thông tin đáng tin cậy và có cơ sở khoa học rõ ràng từ các bộ sách giáo khoa của Bộ giáo dục và đào tạo, sách tham khảo khoa học.Cách nói chuyện của bạn với học sinh sẽ ngắn ngọn, dễ hiểu, nếu đưa ra thông tin nào thì phải có ví dụ cho học sinh hiểu vấn đề bạn đang nói, luôn luôn hỏi học sinh sau khi trả lời câu hỏi của học sinh rằng: “Có thông tin nào mà bạn không hiểu không, nếu có thì nói cho tôi biết ngay để tôi giải thích ngay cho nhé!”.' },
-              { role: 'user', content: userMessage }
-            ]
+            messages: userMessage
           })
         });
-
         if (!response.ok) {
           let errText = response.statusText || '';
           try { errText = await response.text(); } catch(e){}
