@@ -5,4 +5,4 @@ git add "..."
 git rm "..."
 *> "..." là remove file mới để commit
 git pull origin main
-*> là để pull từ github về vscode
+*> là để pull từ file github về vscode
