@@ -26,31 +26,10 @@
     <a href="#" onclick="showPage('flashcards', this)"><i class="fa-solid fa-clone"></i>Flashcards</a>
     <a href="#" onclick="showPage('periodic', this)"><i class="fa-solid fa-atom"></i>Bảng tuần hoàn</a>
     <a href="#" onclick="showPage('ai',this)"><i class="fa-solid fa-robot"></i>AI hỗ trợ</a>
-    <a href="#" onclick="showPage('setting', this)"><i class="fa-solid fa-gear"></i>Cài đặt</a>
-    <img src="/Knowlegde/footer-logo-school.png"
-         style="max-width:6%; border-radius:12px;
-            position:fixed; bottom:20px; left:5%;
-            transform:translateX(-50%);">
+    <img src="C:\Users\ssd\OneDrive\Documents\Sci4U - Science for you\Project-KienHoangNCKH-IGCTN2526-Sci4U-Science-for-you\Knowlegde\footer-logo-school.png" class="sidebar-logo" alt="Logo trường">
   </nav>
   
-  <!-- Nút cuộn -->
-<button id="scrollTopBtn" 
-        style="
-          position: fixed;
-          bottom: 30px;
-          right: 30px;
-          background-color: #293f63;
-          color: white;
-          border: none;
-          border-radius: 50%;
-          width: 55px;
-          height: 55px;
-          display: none;
-          cursor: pointer;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        ">
-  <i class="fas fa-arrow-up"></i>
-</button>
+
 
   <!-- blablabla -->
   <div class="content">
@@ -157,96 +136,6 @@
       </div>
     </main>
 
-      <!-- Setting -->
-<main id="setting" class="page">
-  <h2>⚙️ Cài đặt</h2>
-  <!-- Settings grid -->
-  <div class="settings-grid">
-
-  <!-- Tài khoản -->
-  <section class="setting-section">
-    <h3>👤 Tài khoản</h3>
-    <button>Đăng nhập</button>
-    <button>Đăng ký</button>
-    <p style="font-size:14px;color:gray">*(Tính năng sắp cập nhật)*</p>
-  </section>
-
-  <!-- Giao diện -->
-  <section class="setting-section">
-    <h3>🎨 Giao diện</h3>
-    
-    <label>
-      Chế độ nền:
-      <select id="theme-select" onchange="changeTheme()">
-        <option value="light">🌞 Sáng</option>
-        <option value="dark">🌙 Tối</option>
-      </select>
-    </label>
-
-    <br><br>
-
-    <label>
-      Kích thước chữ:
-      <select id="font-size-select" onchange="changeFontSize()">
-        <option value="12">Nhỏ</option>
-        <option value="16" selected>Vừa</option>
-        <option value="20">Lớn</option>
-      </select>
-    </label>
-
-    <br><br>
-
-    <label>
-      Ngôn ngữ:
-      <select id="lang-select" onchange="changeLanguage()">
-        <option value="vi">Tiếng Việt</option>
-        <option value="en">English</option>
-      </select>
-    </label>
-  </section>
-
-  <!-- Âm thanh -->
-  <section class="setting-section">
-    <h3>🔊 Âm thanh</h3>
-    <label class="switch">
-      <input type="checkbox" id="sound-toggle" onchange="toggleSound()">
-      <span class="slider"></span>
-      Bật âm Quiz
-    </label><br>
-    <label class="switch">
-      <input type="checkbox" id="wrong-sound-toggle" onchange="toggleWrongSound()">
-      <span class="slider"></span>
-      Âm báo sai
-    </label>
-  </section>
-
-  <!-- Thông báo -->
-  <section class="setting-section">
-    <h3>🔔 Thông báo</h3>
-    <label class="switch">
-      <input type="checkbox" id="notify-toggle" onchange="toggleNotify()">
-      <span class="slider"></span>
-      Bật thông báo tiến trình học
-    </label><br>
-    <label class="switch">
-      <input type="checkbox" id="daily-reminder-toggle" onchange="toggleDailyReminder()">
-      <span class="slider"></span>
-      Nhắc học hàng ngày
-    </label>
-  </section>
-
-  <!-- Bảo mật -->
-  <section class="setting-section">
-    <h3>🔐 Bảo mật & Quyền riêng tư</h3>
-    <button onclick="clearLocalData()">Xóa toàn bộ dữ liệu cục bộ</button>
-    <p style="font-size:14px;color:gray">(bao gồm lịch sử quiz, flashcards,…)</p>
-  </section>
-  </div>
-</main>
-
-  </div>
-
-  <!-- Modal Học tập -->
   <div id="hoc-modal" class="modal">
     <div class="modal-box">
       <h3>Chọn lớp để học</h3>
